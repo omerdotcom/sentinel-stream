@@ -37,8 +37,8 @@ export function TopBar() {
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Clock className="h-4 w-4" />
-          <span className="font-mono text-xs">
-            {time
+          <span className="font-mono text-xs" suppressHydrationWarning>
+            {time !== null
               ? `${time.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} ${time.toLocaleTimeString("en-US", { hour12: false })}`
               : "\u00A0"}
           </span>
