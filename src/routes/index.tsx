@@ -1,26 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { StatsCards } from "@/components/StatsCards";
+import { CameraGrid } from "@/components/CameraGrid";
+import { EventLog } from "@/components/EventLog";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: Dashboard,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Dashboard() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="space-y-4">
+      <div>
+        <h1 className="text-lg font-bold text-foreground">Dashboard</h1>
+        <p className="text-xs text-muted-foreground">Real-time surveillance overview</p>
+      </div>
+
+      <StatsCards />
+
+      <div className="grid gap-4 lg:grid-cols-[1fr_300px]">
+        <CameraGrid />
+        <EventLog />
+      </div>
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }

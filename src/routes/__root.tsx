@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-
 import appCss from "../styles.css?url";
+import { AppSidebar } from "@/components/AppSidebar";
+import { TopBar } from "@/components/TopBar";
 
 function NotFoundComponent() {
   return (
@@ -29,20 +30,12 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { title: "Sentinel — Live Surveillance System" },
+      { name: "description", content: "Professional real-time video surveillance monitoring system" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -65,5 +58,15 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <div className="flex h-screen w-full overflow-hidden">
+      <AppSidebar />
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <TopBar />
+        <main className="flex-1 overflow-y-auto p-4">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
 }
