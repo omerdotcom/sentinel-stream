@@ -39,7 +39,7 @@ export function AppSidebar() {
         <Shield className="h-7 w-7 shrink-0 text-primary" />
         {!collapsed && (
           <span className="text-sm font-bold tracking-wide text-foreground">
-            SENTINEL
+            CYBER GUARD
           </span>
         )}
       </div>
