@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Maximize2,
   Circle,
@@ -23,7 +23,13 @@ interface CameraCardProps {
 export function CameraCard({ camera, onFullscreen, onEdit }: CameraCardProps) {
   const { toggleRecording, deleteCamera, simulateMotion } = useCameraStore();
   const [showMenu, setShowMenu] = useState(false);
-  const [time] = useState(new Date());
+  const [time, setTime] = useState<Date | null>(null);
+
+  useEffect(() => {
+    setTime(new Date());
+    const interval = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div
@@ -102,8 +108,8 @@ export function CameraCard({ camera, onFullscreen, onEdit }: CameraCardProps) {
 
       {/* Bottom bar */}
       <div className="flex items-center justify-between border-t border-border px-2 py-1.5">
-        <span className="font-mono text-[10px] text-muted-foreground">
-          {time.toLocaleTimeString("en-US", { hour12: false })}
+        <span className="font-mono text-[10px] text-muted-foreground" suppressHydrationWarning>
+          {time ? time.toLocaleTimeString("en-US", { hour12: false }) : "--:--:--"}
         </span>
         <div className="relative">
           <button
