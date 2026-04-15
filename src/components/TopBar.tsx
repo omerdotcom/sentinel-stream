@@ -6,9 +6,10 @@ export function TopBar() {
   const cameras = useCameraStore((s) => s.cameras);
   const online = cameras.filter((c) => c.status === "online").length;
   const offline = cameras.filter((c) => c.status === "offline").length;
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {
+    setTime(new Date());
     const interval = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
