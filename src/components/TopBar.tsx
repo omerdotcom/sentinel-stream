@@ -6,9 +6,10 @@ export function TopBar() {
   const cameras = useCameraStore((s) => s.cameras);
   const online = cameras.filter((c) => c.status === "online").length;
   const offline = cameras.filter((c) => c.status === "offline").length;
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {
+    setTime(new Date());
     const interval = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
@@ -37,12 +38,9 @@ export function TopBar() {
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Clock className="h-4 w-4" />
           <span className="font-mono text-xs">
-            {time.toLocaleDateString("en-US", {
-              weekday: "short",
-              month: "short",
-              day: "numeric",
-            })}{" "}
-            {time.toLocaleTimeString("en-US", { hour12: false })}
+            {time
+              ? `${time.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} ${time.toLocaleTimeString("en-US", { hour12: false })}`
+              : "\u00A0"}
           </span>
         </div>
         <div className="flex items-center gap-2 rounded-md bg-accent px-3 py-1.5">
