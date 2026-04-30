@@ -19,8 +19,15 @@ export function CameraFeed({ camera, className = "" }: CameraFeedProps) {
     }
 
     setError(false);
+    
+    if (camera.streamType === "mp4"){
+    	video.src = camera.streamUrl;
+    	video.loop = true;
+    	video.muted = true;
+    	video.play().catch(() => {});
+    }
 
-    if (camera.streamType === "hls" && Hls.isSupported()) {
+    else if (camera.streamType === "hls" && Hls.isSupported()) {
       const hls = new Hls({
         enableWorker: false,
         lowLatencyMode: true,

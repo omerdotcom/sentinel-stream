@@ -15,7 +15,7 @@ export function AddCameraDialog({ onClose, editCamera }: AddCameraDialogProps) {
   const [group, setGroup] = useState(editCamera?.group ?? "");
   const [streamUrl, setStreamUrl] = useState(editCamera?.streamUrl ?? "");
   const [streamType, setStreamType] = useState<Camera["streamType"]>(
-    editCamera?.streamType ?? "hls"
+    editCamera?.streamType ?? "mp4"
   );
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -111,6 +111,7 @@ export function AddCameraDialog({ onClose, editCamera }: AddCameraDialogProps) {
               <option value="webrtc">WebRTC</option>
               <option value="rtsp">RTSP</option>
               <option value="rtmp">RTMP</option>
+              <option value="mp4">MP4 / File</option>
               <option value="mock">Mock / Test</option>
             </select>
           </div>
